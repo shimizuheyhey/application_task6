@@ -1,7 +1,0 @@
-　　　
-      <div class="form-group">
-      <%= form_with(model:[@books, @book_comment], remote: true) do |f| %>
-      <%= f.text_area :comment,size:"90x5", rows:'5',placeholder: "コメントをここに" %>
-      <%= f.submit "送信" %>
-      <% end %>
-      </div>

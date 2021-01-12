@@ -1,6 +1,7 @@
 <table class='table'>
       <div class="comments">
       <% @books.book_comments.each do |book_comment| %>
+      <%#コメント一覧%>
       <tr>
         <td><%= attachment_image_tag(@books.user, :profile_image,:fill, 50, 50, fallback: "no_image.jpg") %></td>
         <td><%= book_comment.user.name %></td>
@@ -15,4 +16,10 @@
        </div>
         </div>
         </table>
-
+        <%#入力欄%>
+      <div class="form-group">
+      <%= form_with(model:[@books, @book_comment], remote: true) do |f| %>
+      <%= f.text_area :comment,size:"90x5", rows:'5',placeholder: "コメントをここに" %>
+      <%= f.submit "送信" %>
+      <% end %>
+      </div>
