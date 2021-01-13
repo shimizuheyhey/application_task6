@@ -18,14 +18,23 @@
           <td><%= link_to @book.title, book_path(@book) %></td>
           <td><%= @book.body %></td>
        <td class="favorite-btn"id="favorite-btn_<%= @book.id %>"><%= render "favorites/favorite-btn", book: @book %></td>
-       <td id='comment_<%= @book.id %>'>コメント件数：<%= @books.book_comments.count %></td>
+       <td>コメント件数：<%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
           <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
         </tr>
-      </tableid='comment_<%= @book.id %>'>
-      <%= render 'book_comment',books: @books %>
+      </table >
+      <div id='comment_<%= @book.id %>'>
+      <%= render 'book_comments/book_comment',books: @book %>
+
+      </div>
+            <div class="form-group">
+      <%= form_with(model:[@book, @book_comment], remote: true) do |f| %>
+      <%= f.text_area :comment,size:"90x5", rows:'5',placeholder: "コメントをここに" %>
+      <%= f.submit "送信" %>
+      <% end %>
+      </div>
     </div>
   </div>
 </div>
